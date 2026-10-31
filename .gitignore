@@ -1,0 +1,52 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.DS_Store
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+credentials.json
+secrets.json
+*.pem
+*.key
+
+# Private research assets and generated outputs
+/data/
+/checkpoints/
+/evidence/
+/reports/
+/provenance/
+/tracking/
+/runs/
+/restored_history/
+/tools/
+/SHA256SUMS
+/requirements-tested-local.txt
+/tests/test_data_and_recovery.py
+/tests/test_restore.py
+/tests/test_training_workflow.py
+
+# Dataset and model formats
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.parquet
+*.sqlite
+*.db
+*.zip
+
+# Internal project history and backup notes
+/docs/BACKUP_MAP.md
+/docs/HISTORY.md
+/docs/NEXT_PHASE.md
+/docs/RELEASE_NOTES.md

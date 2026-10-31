@@ -1,0 +1,10 @@
+{
+  "episodes": 300,
+  "agent_seed": 17,
+  "route_seed": 303,
+  "handover_cost": 0.875,
+  "threads": 1,
+  "validation_target_steps": [40000, 120000, 200000, 280000],
+  "agent_overrides": {},
+  "network_overrides": {}
+}
