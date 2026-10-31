@@ -26,6 +26,7 @@ secrets.json
 /provenance/
 /tracking/
 /runs/
+/logs/
 /restored_history/
 /tools/
 /SHA256SUMS

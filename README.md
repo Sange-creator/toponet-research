@@ -19,7 +19,7 @@ The code compares three frozen learned policies with a configured A3-style hando
 
 These aggregate results are from the project's private experiment archive. The public repository does not include the raw inputs, complete case records, or trained policies needed to reproduce them. Same-area test routes share road segments with training routes. The results do not establish unseen-road generalization, performance on real networks, or deployment readiness.
 
-The evaluation has material limitations. Same-area short-stay proportions increased for all three learned policies. Only three training seeds were evaluated. No matched non-GNN ablation establishes that graph message passing is necessary, and the reported comparison is against one configured A3-style baseline. These results should be interpreted as a bounded simulation comparison.
+The evaluation has material limitations. Same-area short-stay proportions increased for all three learned policies. Only three training seeds were evaluated. No non-GNN ablation results are included yet, so these results do not establish that graph message passing is necessary. The reported comparison is against one configured A3-style baseline. These results should be interpreted as a bounded simulation comparison. A controlled MLP ablation workflow is provided in `hpcorbit/`.
 
 ## Repository layout
 
@@ -44,6 +44,13 @@ toponet-research/
 │   ├── evaluation/   # Replay, diagnostics, metrics, and analysis
 │   ├── models/       # Graph-attention Q-network
 │   └── training/     # Episode scheduling, sampling, and recovery
+├── hpcorbit/         # Graph-free MLP ablation and Slurm workflows
+│   ├── README.md
+│   ├── nodewise_mlp.py
+│   ├── prepare_non_gnn_configs.py
+│   ├── train_non_gnn.py
+│   ├── evaluate_non_gnn.py
+│   └── *.slurm / *.sh
 └── tests/
     └── test_core.py
 ```
@@ -56,6 +63,7 @@ Local datasets, trained policies, detailed experiment records, generated reports
 - [Configuration](docs/CONFIGURATION.md) explains how to create controlled training configurations.
 - [Results](docs/RESULTS.md) records the reported outcomes and their interpretation limits.
 - [Data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md) documents the omitted assets and replication boundaries.
+- [HPCOrbit ablation](hpcorbit/README.md) documents the matched non-GNN training and evaluation workflow.
 
 ## Requirements
 
