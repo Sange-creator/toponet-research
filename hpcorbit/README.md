@@ -125,8 +125,9 @@ per_case.jsonl     Paired archived and MLP results for each scenario
 summary.json       Aggregate metrics and route-clustered intervals
 ```
 
-The summary reports each MLP policy against A3 and every archived GAT policy.
-The pairwise intervals use the same scenario and route-cluster pairing.
+The summary reports each MLP policy against A3 and its archived GAT policy
+with the same training seed. The pairwise intervals use the same scenario and
+route-cluster pairing.
 The intervals are conditional on the frozen policies and evaluated scenarios.
 They do not measure variability across training seeds, cities, or layout
 populations. Report all three matched seed results and the pooled scenario

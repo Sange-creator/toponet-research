@@ -181,6 +181,25 @@ def archived_case(project: Path, area: str, index: int, scenario: dict, controll
     return values
 
 
+def frozen_gat_seeds(project: Path, plan: dict, controllers: list) -> dict[str, int]:
+    seeds = {}
+    for label in controllers:
+        if label == "a3" or label not in plan["policies"]:
+            continue
+        policy = plan["policies"][label]
+        checkpoint = project / "checkpoints/frozen" / Path(policy["frozen_copy"]).name
+        if sha256(checkpoint) != policy["sha256"]:
+            raise ValueError(f"Frozen GAT checkpoint hash mismatch: {label}")
+        payload = torch.load(checkpoint, map_location="cpu", weights_only=True)
+        seed = payload.get("seed")
+        if isinstance(seed, bool) or not isinstance(seed, int):
+            raise ValueError(f"Frozen GAT checkpoint has no integer seed: {label}")
+        seeds[label] = seed
+    if len(set(seeds.values())) != len(seeds):
+        raise ValueError("Frozen GAT policies do not have unique training seeds")
+    return seeds
+
+
 def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, samples: int):
     project = project.resolve()
     output = output.resolve()
@@ -190,6 +209,7 @@ def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, sampl
 
     plan = read_json(project / "evidence/heldout/EVALUATION_PLAN.json")
     controllers = plan["controllers"]
+    gat_seeds = frozen_gat_seeds(project, plan, controllers)
     scenarios = (
         plan["scenarios"]
         if area == "heldout"
@@ -227,12 +247,12 @@ def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, sampl
 
     for index, scenario in enumerate(scenarios, start=1):
         values = archived_case(project, area, index, scenario, controllers)
-        vi = (
-            dataset.interface(scenario["route"], 0.875)
-            if area == "heldout"
-            else pokhara_interface(project, scenario)
-        )
         for label, native in policies.items():
+            vi = (
+                dataset.interface(scenario["route"], 0.875)
+                if area == "heldout"
+                else pokhara_interface(project, scenario)
+            )
             policy = (
                 native
                 if area == "heldout"
@@ -269,9 +289,6 @@ def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, sampl
     metrics = {
         label: aggregate([case[label] for case in cases]) for label in labels
     }
-    gat_labels = [
-        label for label in controllers if label != "a3" and label in plan["policies"]
-    ]
     comparisons = {}
     pairwise_gat = {}
     baseline_rate = metrics["a3"]["handovers"]
@@ -300,27 +317,41 @@ def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, sampl
             ),
         }
         if label in policies:
-            pairwise_gat[label] = {}
-            for gat_label in gat_labels:
-                model_metrics = metrics[label]
-                gat_metrics = metrics[gat_label]
-                pairwise_gat[label][gat_label] = {
-                    "throughput_delta_mbps": (
-                        model_metrics["throughput_mbps"]
-                        - gat_metrics["throughput_mbps"]
-                    ),
-                    "handover_rate_delta_per_hour": (
-                        model_metrics["handovers_per_hour"]
-                        - gat_metrics["handovers_per_hour"]
-                    ),
-                    "short_stay_delta_percentage_points": (
-                        model_metrics["short_stay_percent"]
-                        - gat_metrics["short_stay_percent"]
-                    ),
-                    "clustered_intervals": paired_cluster_intervals(
-                        cases, scenarios, label, gat_label, area, samples
-                    ),
-                }
+            mlp_seed = next(
+                record["agent_seed"] for record in run_metadata
+                if f"mlp_seed_{record['agent_seed']}" == label
+            )
+            matching = [
+                gat_label for gat_label, gat_seed in gat_seeds.items()
+                if gat_seed == mlp_seed
+            ]
+            if len(matching) != 1:
+                raise ValueError(
+                    f"Expected exactly one GAT policy for MLP seed {mlp_seed}; "
+                    f"found {matching}"
+                )
+            gat_label = matching[0]
+            model_metrics = metrics[label]
+            gat_metrics = metrics[gat_label]
+            pairwise_gat[label] = {
+                "matched_gat_policy": gat_label,
+                "matched_agent_seed": mlp_seed,
+                "throughput_delta_mbps": (
+                    model_metrics["throughput_mbps"]
+                    - gat_metrics["throughput_mbps"]
+                ),
+                "handover_rate_delta_per_hour": (
+                    model_metrics["handovers_per_hour"]
+                    - gat_metrics["handovers_per_hour"]
+                ),
+                "short_stay_delta_percentage_points": (
+                    model_metrics["short_stay_percent"]
+                    - gat_metrics["short_stay_percent"]
+                ),
+                "clustered_intervals": paired_cluster_intervals(
+                    cases, scenarios, label, gat_label, area, samples
+                ),
+            }
 
     (output / "per_case.jsonl").write_text("\n".join(output_lines) + "\n")
     write_json(
@@ -332,7 +363,7 @@ def evaluate(project: Path, area: str, run_dirs: list[Path], output: Path, sampl
             "bootstrap_samples": samples,
             "metrics": metrics,
             "comparisons_vs_a3": comparisons,
-            "mlp_vs_each_gat_policy": pairwise_gat,
+            "mlp_vs_matched_gat_policy": pairwise_gat,
             "policy_runs": run_metadata,
             "limitations": [
                 "Intervals are conditional on these frozen policies and evaluated scenarios.",
