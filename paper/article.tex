@@ -169,7 +169,7 @@ Training follows a repeated loop: the policy observes the simulator, chooses an 
 \end{equation}
 Here, $a_{t+1}^{\star}=\arg\max_{i\in\mathcal{A}_{t+1}}Q_\theta(o_{t+1},i)$ is the allowed next action with the highest online-network score. For a terminal transition, the target is just the current reward; there is no future value. This is a Double-DQN update with a time-adjusted discount for a shortened final interval \cite{mnih2015,vanhasselt2016,velickovic2018,wang2016}.
 
-We tested seven handover penalties: $c_H\in\{0.25,0.375,0.5,0.625,0.75,0.875,1.0\}$. Four candidates advanced to the medium training budget, and three continued to the full budget. We checked them on six fixed development routes. A candidate passed only if every tested seed had higher throughput than the configured A3-style controller and no more handovers, ping-pongs, or weak-service time. Among the candidates that passed, $c_H=0.875$ had the highest throughput. Figure~\ref{fig:training_workflow} shows this search and the later training and evaluation steps.
+We tested seven handover penalties: $c_H\in\{0.25,0.375,0.5,0.625,0.75,0.875,1.0\}$. Four candidates advanced to the medium training budget, and three continued to the full budget. We checked them on six fixed development routes. A candidate passed only if every tested seed had higher throughput than the configured A3-style controller and no more handovers, ping-pongs, or weak-service time. Among the candidates that passed, $c_H=0.875$ had the highest throughput.
 
 With $c_H$ fixed at 0.875, we trained three policies using seeds 17, 27, and 37. Each followed the same plan of 300 journeys and completed 380,423 simulator steps. The journeys had 300 different route IDs, although some routes may share road segments. The evaluation uses these three trained policies.
 
@@ -191,12 +191,6 @@ We checked saved checkpoints on the same six development routes and kept one eli
 \vspace{-3pt}\hrule
 \end{minipage}
 
-\begin{figure*}[t]\centering
-  \includegraphics[width=\textwidth]{Graphics/training_and_checkpoint_workflow.pdf}
-  \caption{Training and checkpoint-selection workflow. The handover-cost search and checkpoint gate use six fixed development routes. After checkpoint selection, the three frozen policies are evaluated greedily on the 639 reserved cases and 540 Pokhara transfer groups.}
-  \label{fig:training_workflow}
-\end{figure*}
-
 \begin{figure}[H]\centering
   \includegraphics[width=0.98\linewidth]{Graphics/training_validation_progress.pdf}
   \caption{Development validation at five checkpoints from 41,125 to 380,423 environment steps, using the same six routes and conditions for each seed. Stars identify the frozen checkpoints selected by the full development gate; dashed lines show the A3 reference. Seed 27's 380,423-step checkpoint failed the ping-pong gate, so its 280,778-step checkpoint was retained. These fixed-route checkpoint measurements are not per-episode training returns.}
@@ -204,13 +198,7 @@ We checked saved checkpoints on the same six development routes and kept one eli
 \end{figure}
 
 \subsection{Trained-policy operation}
-At each decision, the simulator provides the cell features and allowed-action mask. The graph encoder combines information from connected cells. The dueling head scores each cell, and the controller selects the allowed cell with the highest score. If this is a different cell, the simulator records a handover and pauses service for 0.1 s. It then advances the traffic and service models and returns the next observation and reward. Figure~\ref{fig:architecture} shows this loop. During evaluation, the saved policy always chooses the allowed action with the highest score. It does not explore, save new transitions, or update its weights.
-
-\begin{figure*}[t]\centering
-  \includegraphics[width=\textwidth]{Graphics/overall_policy_architecture.pdf}
-  \caption{Overall architecture of the graph-attention dueling Double-DQN controller. The cell feature matrix and graph are encoded into cell representations; the dueling head scores candidate cells, and the legal-action mask restricts selection. The simulator applies the selected action and returns the reward, elapsed time, and next observation.}
-  \label{fig:architecture}
-\end{figure*}
+At each decision, the simulator provides the cell features and allowed-action mask. The graph encoder combines information from connected cells. The dueling head scores each cell, and the controller selects the allowed cell with the highest score. If this is a different cell, the simulator records a handover and pauses service for 0.1 s. It then advances the traffic and service models and returns the next observation and reward. During evaluation, the saved policy always chooses the allowed action with the highest score. It does not explore, save new transitions, or update its weights.
 
 \subsection{Reproducibility and evaluation boundaries}
 For repeatability, we keep the route splits, scenario seeds, feature definitions, radio settings, and selected checkpoints. Each controller uses the same route, layout, and condition group. We report the three learned seeds separately. The result files include throughput, handover rate, weak-service time, ping-pongs, completed short stays, and background service. Rates use the matching total simulation time. The uncertainty analysis keeps cases from the same routes together. These steps make the simulator tests easier to repeat, but they do not remove the study's limits. The model uses a fixed travel speed, simulator information and route look-ahead, simplified resource sharing, and assumed radio and load settings. Roads also overlap between training and reserved test routes. Pokhara tests use different roads and simulated cell layouts, so they are not field validation. The study does not show that training has converged, that graph attention caused the results, or that the controller is ready for commercial use.
@@ -300,7 +288,7 @@ We tested three fixed learned policies on 639 reserved route cases and 540 Pokha
 
 \phantomsection
 \section*{Data and Code Availability}
-The simulator code, inputs, and complete case-level results are held in the project archives used for this study. They have not been deposited in a public repository, and no DOI is available.
+The research code and manuscript files are available at \url{https://github.com/Sange-creator/toponet-research}. The route and cell-layout inputs, trained policy checkpoints, and complete case-level results are not included in the repository. The reported experiments therefore cannot be reproduced from the public repository alone.
 
 \phantomsection
 \bibliographystyle{unsrt}
