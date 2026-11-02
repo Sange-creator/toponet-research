@@ -1,0 +1,15 @@
+% Identified editorial version for submission to the 19th IOE Graduate Conference.
+
+\PaperTitle{Graph-Attention Double-DQN for Cellular Handover: A Paired Simulation Evaluation}
+
+\Authors{Saange Tamang\textsuperscript{a}, Sulav Kandel\textsuperscript{b}}
+
+\Abstract{
+Cell handover helps a moving phone stay connected as it moves between cells. A controller must decide when to switch. Switching too often can interrupt service, while staying on a weak cell can reduce data delivery. This study tests a graph-attention dueling Double DQN (DDQN) that selects the serving cell using simulated signal, load, and movement information. We compare three trained, fixed policies with a configured A3-style controller on 639 reserved route cases and 540 Pokhara transfer groups with simulated cell layouts. On the reserved routes, the learned policies have 8.9--10.0\% higher aggregate throughput and 36.1--53.0\% fewer handovers per hour. They also have fewer ping-pongs and less weak-service time, but a higher share of completed stays shorter than 5 s. In the Pokhara tests, throughput is 3.7--3.9\% higher, with fewer handovers, ping-pongs, and less weak-service time. Short-stay results differ by policy. We also tested a load-aware rule after reviewing the main results; it did not meet the development criteria. The tests use three training seeds, roads that partly overlap with training routes, simulated cell layouts, and information available only in the simulator. The results do not show field performance or prove that graph attention caused the differences.
+}
+
+\Keywords{cellular handover, graph attention, Double DQN, reinforcement learning, simulation}
+
+\Affiliation{\textsuperscript{a,b} Paschimanchal Campus, Institute of Engineering, Tribhuvan University, Pokhara, Nepal}
+
+\Email{\textsuperscript{a} connectwithsaange@gmail.com; \textsuperscript{b} connectwithsulav@gmail.com}

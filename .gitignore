@@ -45,6 +45,17 @@ secrets.json
 *.sqlite
 *.db
 *.zip
+!paper/IOEGC19_identified_source.zip
+
+# LaTeX build files (the submitted PDF is kept in paper/)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
 
 # Internal project history and backup notes
 /docs/BACKUP_MAP.md

@@ -4,6 +4,8 @@ This repository contains the simulation code for a graph-attention Dueling Doubl
 
 The project is intended for research review and reproducibility work. It is not a production network controller. It has not been validated on an operating cellular network.
 
+The identified manuscript, its PDF, LaTeX source, and figures are in [`paper/`](paper/). The paper describes the method, evaluation, results, and study limits. Its simulation inputs and complete case records are not included, so the published results cannot be reproduced from this repository alone.
+
 ## Research scope
 
 The agent combines graph attention with a Dueling Double DQN. Its observation includes simulator-derived radio, rate, load, mobility, and recent handover information. It also uses one-step route lookahead. These inputs are simulation assumptions; their availability to a handset or operator system has not been established.
@@ -36,6 +38,7 @@ toponet-research/
 │   ├── CONFIGURATION.md
 │   ├── DATA_AND_REPRODUCIBILITY.md
 │   └── RESULTS.md
+├── paper/            # Identified IOEGC manuscript, PDF, and LaTeX source
 ├── src/toponet/
 │   ├── agents/       # Double-DQN agent and replay buffer
 │   ├── baselines/    # A3-style and load-aware controllers
@@ -64,6 +67,7 @@ Local datasets, trained policies, detailed experiment records, generated reports
 - [Results](docs/RESULTS.md) records the reported outcomes and their interpretation limits.
 - [Data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md) documents the omitted assets and replication boundaries.
 - [HPCOrbit ablation](hpcorbit/README.md) documents the matched non-GNN training and evaluation workflow.
+- [Paper](paper/README.md) explains the manuscript files and how to build the PDF.
 
 ## Requirements
 
