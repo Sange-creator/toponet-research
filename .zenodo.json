@@ -1,0 +1,27 @@
+{
+  "title": "TopoNet research paper, code, and highway observations",
+  "version": "0.1.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Tamang, Saange",
+      "affiliation": "Paschimanchal Campus, Pokhara, Nepal"
+    },
+    {
+      "name": "Kandel, Sulav",
+      "affiliation": "Paschimanchal Campus, Pokhara, Nepal"
+    }
+  ],
+  "keywords": [
+    "cellular handover",
+    "graph attention",
+    "Double DQN",
+    "reinforcement learning",
+    "vehicular networks",
+    "Nepal"
+  ],
+  "description": "Research software and manuscript for a simulation study of graph-attention Double-DQN cellular handover. This release also includes a privacy-filtered extract of 5,064 one-second dashboard observations from three iPhone 15 recordings made while travelling along the Prithvi Highway. The observations provide field context only; they were not used to train, tune, or evaluate the controller. The phone-number and raw OCR fields and original screen recordings are excluded. The route and cell-layout inputs, trained policy checkpoints, and complete simulation case-level results are not included, so the reported simulation study cannot be reproduced from this release alone."
+}
