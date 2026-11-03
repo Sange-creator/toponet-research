@@ -14,7 +14,7 @@ The result table in the README summarizes a completed private simulation archive
 
 As a result, a clean clone includes the Kathmandu site layout but still cannot independently reproduce the reported evaluation. The route partitions, trained checkpoints, and complete case records are unavailable. Dataset-backed commands require compatible local inputs and checkpoint files. The tested-local dependency inventory is not a validated cross-platform lock file.
 
-Do not publish inferred cell-site information as verified operator infrastructure. The highway extract in the current GitHub repository is covered by the repository's MIT License. The earlier Zenodo `v0.1.0` snapshot remains separately available under CC BY 4.0 at [DOI 10.5281/zenodo.23922329](https://doi.org/10.5281/zenodo.23922329).
+Do not publish inferred cell-site information as verified operator infrastructure. The highway extract in the current GitHub repository is covered by the repository's MIT License. The current Zenodo `v0.2.0` release, which adds the Kathmandu cell-layout workbook, is available at [DOI 10.5281/zenodo.23927120](https://doi.org/10.5281/zenodo.23927120); its [concept DOI](https://doi.org/10.5281/zenodo.23922328) resolves to the latest version. The earlier `v0.1.0` snapshot remains available at [DOI 10.5281/zenodo.23922329](https://doi.org/10.5281/zenodo.23922329).
 
 ## Validation boundaries
 
