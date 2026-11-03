@@ -107,4 +107,4 @@ Other historical integration checks depend on private datasets, model weights, o
 
 ## License
 
-No software license has been selected for this release. The repository is public for inspection, but public visibility does not grant permission to reuse or redistribute the code.
+The original code and author-created materials in this GitHub repository are licensed under the MIT License; see [`LICENSE`](LICENSE). Third-party materials keep their stated licenses. The earlier Zenodo `v0.1.0` snapshot remains separately archived under CC BY 4.0 at [DOI 10.5281/zenodo.23922329](https://doi.org/10.5281/zenodo.23922329). The original phone recordings are not included.

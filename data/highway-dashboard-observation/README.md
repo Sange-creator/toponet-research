@@ -27,4 +27,4 @@ The QA status and notes are retained from the source workbook. They record secon
 
 The workbook does not include GPS coordinates or the exact start point, end point, or direction of travel. The Prithvi Highway label and iPhone 15 model are provided by the authors. The source recordings are not included. The displayed cell ID and signal readings can show observed radio variation; a cell-ID change alone does not establish a handover, and these data do not measure throughput or controller performance.
 
-This release removes the phone-number and raw-OCR fields but retains radio measurements and displayed cell identifiers. No reuse license has been assigned to this dataset in this release.
+This release removes the phone-number and raw-OCR fields but retains radio measurements and displayed cell identifiers. The dataset in the current GitHub repository is covered by the repository's MIT License. The earlier Zenodo `v0.1.0` snapshot is separately available under CC BY 4.0 at [DOI 10.5281/zenodo.23922329](https://doi.org/10.5281/zenodo.23922329).
