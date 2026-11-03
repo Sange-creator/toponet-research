@@ -19,7 +19,11 @@ secrets.json
 *.key
 
 # Private research assets and generated outputs
-/data/
+/data/*
+!/data/highway-dashboard-observation/
+!/data/highway-dashboard-observation/**
+!/data/kathmandu-osm-cell-layout/
+!/data/kathmandu-osm-cell-layout/**
 /checkpoints/
 /evidence/
 /reports/

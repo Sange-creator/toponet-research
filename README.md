@@ -4,7 +4,7 @@ This repository contains the simulation code for a graph-attention Dueling Doubl
 
 The project is intended for research review and reproducibility work. It is not a production network controller. It has not been validated on an operating cellular network.
 
-The identified manuscript, its PDF, LaTeX source, and figures are in [`paper/`](paper/). The paper describes the method, evaluation, results, and study limits. Its simulation inputs and complete case records are not included, so the published results cannot be reproduced from this repository alone.
+The identified manuscript, its PDF, LaTeX source, and figures are in [`paper/`](paper/). The paper describes the method, evaluation, results, and study limits. The 46-site Kathmandu cell-layout workbook is included in [`data/kathmandu-osm-cell-layout/`](data/kathmandu-osm-cell-layout/). Route splits, trained checkpoints, and complete case records remain unavailable, so the published results cannot be reproduced from this repository alone.
 
 ## Research scope
 
@@ -64,7 +64,7 @@ toponet-research/
     └── test_core.py
 ```
 
-The simulation datasets, trained policies, detailed experiment records, generated reports, and backup metadata are excluded because redistribution rights and attribution have not been cleared. The separate highway dashboard extract is described in [data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md); it is not simulation input or model evaluation data.
+The Kathmandu 46-site cell-layout workbook is included with OpenStreetMap attribution and ODbL licensing. Its site locations were checked against OSM-mapped locations. Other network-configuration fields in the workbook are supplied layout/simulation attributes and are not presented as operator-verified data. Route splits, trained policies, detailed experiment records, generated reports, and backup metadata remain excluded because their redistribution rights and attribution have not been cleared. The separate highway dashboard extract is described in [data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md); it is not simulation input or model evaluation data.
 
 ## Documentation
 
