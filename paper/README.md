@@ -25,6 +25,6 @@ The first build may need an internet connection to download LaTeX packages. The 
 
 ## Results and data
 
-The paper reports simulation results for reserved routes and Pokhara transfer scenarios. Route and cell-layout inputs, trained policy checkpoints, and complete case-level results are not included in this repository. The PDF therefore documents the results but cannot be rebuilt from the experiment archive using this source tree alone. See [`../docs/DATA_AND_REPRODUCIBILITY.md`](../docs/DATA_AND_REPRODUCIBILITY.md) for details.
+The paper reports simulation results for reserved routes and Pokhara transfer scenarios. A separate, privacy-filtered extract of iPhone 15 dashboard observations from travel along the Prithvi Highway is available in [`../data/highway-dashboard-observation/`](../data/highway-dashboard-observation/); it is field context only, not model-training or evaluation data. Route and cell-layout inputs, trained policy checkpoints, and complete simulation case-level results are not included in this repository. The PDF therefore documents the simulation results but cannot be rebuilt from the experiment archive using this source tree alone. See [`../docs/DATA_AND_REPRODUCIBILITY.md`](../docs/DATA_AND_REPRODUCIBILITY.md) for details.
 
 This is the identified version. It includes the author information above and is not an anonymized review copy.

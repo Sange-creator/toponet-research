@@ -2,9 +2,9 @@
 
 ## Public release contents
 
-This repository contains the Python implementation, reference configuration files, and code-only numerical checks. It does not contain route geometry, cell-layout inputs, trained checkpoints, per-scenario traces, complete evaluation records, private backup indexes, or generated analysis outputs.
+This repository contains the Python implementation, reference configuration files, code-only numerical checks, and a privacy-filtered extract of the separate highway dashboard observations. The extract is described in [`../data/highway-dashboard-observation/README.md`](../data/highway-dashboard-observation/README.md). It does not contain route geometry, cell-layout inputs, trained checkpoints, per-scenario simulation traces, complete simulation evaluation records, private backup indexes, or generated simulation analysis outputs.
 
-Those artifacts remain outside the public release because redistribution rights and attribution requirements have not been cleared. OpenStreetMap-derived data may carry separate attribution and share-alike obligations. Do not add local research data or model artifacts to a public commit without resolving those requirements.
+The simulation artifacts remain outside the public release because redistribution rights and attribution requirements have not been cleared. OpenStreetMap-derived data may carry separate attribution and share-alike obligations. The highway extract is author-provided dashboard data; it is not operator data and its exact route segment is not encoded. Phone-number and raw-OCR fields and source videos were excluded. Do not treat this extract as validation of the learned controller.
 
 The repository `.gitignore` excludes local data, checkpoints, evidence, reports, provenance, and run outputs. Keep those folders out of public commits even when present in a local working copy.
 
@@ -14,7 +14,7 @@ The result table in the README summarizes a completed private simulation archive
 
 As a result, a clean clone can be used to inspect the implementation and run the code-only checks, but it cannot independently reproduce the reported evaluation. Dataset-backed commands require compatible local inputs and checkpoint files. The tested-local dependency inventory is not a validated cross-platform lock file.
 
-For any future data release, publish a separate data manifest with source, version, collection date, attribution, redistribution license, checksums, and instructions for obtaining the data. Do not publish inferred cell-site information as verified operator infrastructure.
+Do not publish inferred cell-site information as verified operator infrastructure. No reuse license has been assigned to the highway extract.
 
 ## Validation boundaries
 

@@ -12,6 +12,10 @@ The agent combines graph attention with a Dueling Double DQN. Its observation in
 
 The code compares three frozen learned policies with a configured A3-style handover controller. The reported evaluation includes 639 same-area held-out route cases and 540 Pokhara simulation groups. The latter use real road geometry with synthetic cell layouts.
 
+## Highway dashboard observation
+
+The paper's Introduction describes a separate iPhone 15 network-dashboard recording from travel along the Prithvi Highway. A privacy-filtered, one-second extract from three recordings is in [`data/highway-dashboard-observation/`](data/highway-dashboard-observation/). It contains displayed cell identifiers and radio readings, with unavailable values left blank. The observations provide field context only; they were not used to train, tune, or evaluate the controller. The phone-number and raw OCR fields, and the original screen recordings, are not included. The exact highway segment and travel direction are not recorded in the workbook. See the folder README for field definitions and limits.
+
 ## Reported simulation results
 
 | Evaluation | Learned-policy throughput change | Learned-policy handover-rate change |
@@ -38,6 +42,8 @@ toponet-research/
 │   ├── CONFIGURATION.md
 │   ├── DATA_AND_REPRODUCIBILITY.md
 │   └── RESULTS.md
+├── data/
+│   └── highway-dashboard-observation/  # Privacy-filtered field-context extract
 ├── paper/            # Identified IOEGC manuscript, PDF, and LaTeX source
 ├── src/toponet/
 │   ├── agents/       # Double-DQN agent and replay buffer
@@ -58,7 +64,7 @@ toponet-research/
     └── test_core.py
 ```
 
-Local datasets, trained policies, detailed experiment records, generated reports, and backup metadata are intentionally excluded. Their redistribution rights have not been cleared. See [data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md) for the resulting limitations.
+The simulation datasets, trained policies, detailed experiment records, generated reports, and backup metadata are excluded because redistribution rights and attribution have not been cleared. The separate highway dashboard extract is described in [data and reproducibility](docs/DATA_AND_REPRODUCIBILITY.md); it is not simulation input or model evaluation data.
 
 ## Documentation
 
